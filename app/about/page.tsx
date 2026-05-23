@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import Reveal from '../components/Reveal';
-import WordReveal from '../components/WordReveal';
-import MagneticButton from '../components/MagneticButton';
 import StatCounter from '../components/StatCounter';
 
 export const metadata: Metadata = {
@@ -46,33 +45,22 @@ export default function AboutPage() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="frame pt-16 pb-24 max-md:pt-10 max-md:pb-16">
-        <div className="flex items-baseline justify-between hairline-b pb-3 mb-12">
-          <span className="mono ink-mute">[ 04 — studio ]</span>
-          <span className="mono ink-faint">EST. 2017</span>
-        </div>
-
-        <WordReveal
-          as="h1"
-          className="font-display leading-[0.94] tracking-[-0.04em] text-[clamp(3rem,1.6rem+6vw,9rem)]"
-          italic={[5, 6, 7]}
-          signal={[7]}
-        >
-          Eight people. One inbox each. No middle layer.
-        </WordReveal>
-
-        <div className="grid grid-cols-12 gap-6 mt-12">
-          <div className="col-span-12 md:col-span-5 md:col-start-2">
-            <Reveal delay={250}>
-              <p className="text-lg ink-mute leading-relaxed">
-                iMax began as a two-person studio in San Francisco — a backend engineer and a designer tired of well-funded ideas dying in long discovery phases. Today we are eight, deliberately small, and still hands-on.
-              </p>
+      <section className="frame pt-20 pb-24 max-md:pt-12 max-md:pb-14">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-10 items-start">
+          <div className="col-span-12 lg:col-span-8">
+            <Reveal>
+              <h1 className="font-sans font-extrabold leading-[1.02] tracking-[-0.035em] text-[clamp(2.6rem,1.6rem+5vw,5.2rem)]" style={{ color: 'var(--color-ink)' }}>
+                Eight <span className="u-word">people</span>. One inbox each. No middle layer.
+              </h1>
             </Reveal>
           </div>
-          <div className="col-span-12 md:col-span-4 md:col-start-9">
-            <Reveal delay={400}>
-              <p className="text-base ink-mute leading-relaxed">
-                Every project gets senior attention because there is no one for it to roll downhill to. The same people you talk to in the first call are the people writing your code on day one.
+          <div className="col-span-12 lg:col-span-4 lg:pt-6">
+            <Reveal delay={150}>
+              <p className="text-[1.0625rem] md:text-[1.1875rem] leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>
+                iMax began as a two-person studio in San Francisco — a backend engineer and a designer tired of well-funded ideas dying in long discovery phases. Today we are eight, deliberately small, and still hands-on.
+              </p>
+              <p className="mt-5 leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>
+                Every project gets senior attention because there is no one for it to roll downhill to.
               </p>
             </Reveal>
           </div>
@@ -90,34 +78,22 @@ export default function AboutPage() {
       </section>
 
       {/* ============ VALUES ============ */}
-      <section className="frame py-28 max-md:py-16">
-        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
-          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">What we believe</span>
-            <span className="mono ink-faint">/ 02</span>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            Four values · every project
-          </div>
+      <section id="values" className="frame py-24 max-md:py-16">
+        <div className="mb-10">
+          <h2 className="font-sans font-bold text-[clamp(1.6rem,1.2rem+1vw,2.25rem)] tracking-[-0.022em]" style={{ color: 'var(--color-ink)' }}>
+            What we believe
+          </h2>
         </div>
 
         <div className="grid grid-cols-12 gap-6">
-          {VALUES.map((v, i) => (
-            <Reveal
-              key={v.n}
-              className={`col-span-12 md:col-span-6 ${i % 2 === 1 ? 'md:translate-y-12' : ''}`}
-              delay={i * 80}
-            >
-              <article className="hairline-b pb-12">
-                <div className="flex items-baseline gap-4 mb-5">
-                  <span className="font-display text-7xl tracking-tight leading-none ink-faint" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                    {v.n}
-                  </span>
-                  <h3 className="font-display italic text-3xl tracking-tight leading-none signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-                    {v.title}
-                  </h3>
+          {VALUES.map((v) => (
+            <Reveal key={v.n} className="col-span-12 md:col-span-6">
+              <article className="release-card">
+                <div className="flex items-baseline gap-4 mb-2">
+                  <span className="mono">{v.n}</span>
                 </div>
-                <p className="text-base ink-mute leading-relaxed">{v.body}</p>
+                <h3 className="release-title">{v.title}</h3>
+                <p className="release-body">{v.body}</p>
               </article>
             </Reveal>
           ))}
@@ -125,30 +101,27 @@ export default function AboutPage() {
       </section>
 
       {/* ============ TEAM ============ */}
-      <section className="frame py-28 max-md:py-16">
-        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
-          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">The team</span>
-            <span className="mono ink-faint">/ 03</span>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            People you actually work with
-          </div>
+      <section id="team" className="frame py-24 max-md:py-16">
+        <div className="mb-10 flex items-end justify-between hairline-b pb-4">
+          <h2 className="font-sans font-bold text-[clamp(1.6rem,1.2rem+1vw,2.25rem)] tracking-[-0.022em]" style={{ color: 'var(--color-ink)' }}>
+            The team
+          </h2>
+          <span className="mono">People you actually work with</span>
         </div>
 
-        <div className="grid grid-cols-12 gap-x-6 gap-y-2">
-          {TEAM.map((p, i) => (
-            <Reveal key={p.name} className="col-span-12 md:col-span-6" delay={i * 60}>
-              <article className="hairline-b py-8 grid grid-cols-[88px_1fr_auto] gap-6 items-baseline group">
-                <div className="font-display text-[3.4rem] leading-none tracking-tight ink-faint group-hover:signal group-hover:italic transition-colors duration-300" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+        <div className="grid grid-cols-12 gap-x-8 gap-y-2">
+          {TEAM.map((p) => (
+            <Reveal key={p.name} className="col-span-12 md:col-span-6">
+              <article className="hairline-b py-8 grid grid-cols-[88px_1fr_auto] gap-6 items-baseline">
+                <div className="font-sans font-extrabold text-[3rem] leading-none tracking-[-0.04em]" style={{ color: 'var(--color-ink-faint)' }}>
                   {p.initials}
                 </div>
                 <div>
-                  <h4 className="font-display text-2xl leading-tight tracking-tight" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>{p.name}</h4>
-                  <div className="mono ink-mute mt-1">{p.role}</div>
-                  <p className="text-sm ink-mute mt-3 max-w-[42ch] leading-relaxed">{p.bio}</p>
+                  <h4 className="font-sans font-bold text-xl leading-tight tracking-[-0.018em]" style={{ color: 'var(--color-ink)' }}>{p.name}</h4>
+                  <div className="mono mt-1">{p.role}</div>
+                  <p className="mt-3 max-w-[42ch] leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>{p.bio}</p>
                 </div>
-                <div className="mono ink-faint text-right">{p.tag}</div>
+                <div className="mono text-right">{p.tag}</div>
               </article>
             </Reveal>
           ))}
@@ -156,23 +129,21 @@ export default function AboutPage() {
       </section>
 
       {/* ============ CTA ============ */}
-      <section className="frame py-28 max-md:py-16">
+      <section className="frame pb-24 max-md:pb-16">
         <Reveal>
-          <div className="grid grid-cols-12 gap-6 items-baseline">
-            <div className="col-span-12 md:col-span-8">
-              <span className="index">Work with us</span>
-              <h2 className="font-display mt-6 text-[clamp(2.4rem,1.4rem+3vw,5rem)] leading-[0.95] tracking-[-0.03em]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                Bring us in <em className="italic signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>early</em>. Or <em className="italic signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>late</em>. We&apos;ve seen both.
-              </h2>
-              <p className="text-base ink-mute mt-6 max-w-[55ch]">
-                Whether you are at the napkin-sketch stage or three sprints from launch, we can help. Most engagements start with a 30-minute call.
-              </p>
-            </div>
-            <div className="col-span-12 md:col-span-4 md:text-right">
-              <MagneticButton href="/contact" className="btn btn-primary">
-                Get in touch
-              </MagneticButton>
-              <p className="mono ink-mute mt-6">Reply within one business day</p>
+          <div className="feature-panel">
+            <div className="feature-panel-inner" style={{ minHeight: '320px' }}>
+              <div>
+                <h2 className="font-sans font-extrabold leading-[1.02] tracking-[-0.03em]" style={{ fontSize: 'clamp(2.4rem, 1.4rem + 3.5vw, 4.4rem)', color: 'var(--color-paper)' }}>
+                  Bring us in <span style={{ color: 'var(--color-signal-soft)' }}>early</span>. Or late. We’ve seen both.
+                </h2>
+                <p className="feature-sub">
+                  Whether you are at the napkin-sketch stage or three sprints from launch, we can help. Most engagements start with a 30-minute call.
+                </p>
+              </div>
+              <div className="md:text-right flex md:justify-end items-start md:items-center">
+                <Link href="/contact" className="btn btn-light">Get in touch</Link>
+              </div>
             </div>
           </div>
         </Reveal>
@@ -184,9 +155,9 @@ export default function AboutPage() {
 function Num({ n, v, label }: { n: string; v: React.ReactNode; label: string }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="mono ink-faint">{n}</span>
-      <span className="stat-num text-[clamp(2.8rem,1.6rem+3vw,5rem)] tabular-nums">{v}</span>
-      <span className="mono ink-mute">{label}</span>
+      <span className="mono">{n}</span>
+      <span className="stat-num text-[clamp(2.6rem,1.6rem+3vw,4.5rem)] tabular-nums">{v}</span>
+      <span className="mono">{label}</span>
     </div>
   );
 }

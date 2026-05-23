@@ -1,106 +1,103 @@
 import Link from 'next/link';
-import Marquee from './Marquee';
 
-const SERVICES = [
-  { href: '/services#web', label: 'Web' },
-  { href: '/services#mobile', label: 'Mobile' },
-  { href: '/services#cloud', label: 'Cloud' },
+type Item = { href: string; label: string; external?: boolean };
+
+const SERVICES: Item[] = [
+  { href: '/services#web', label: 'Web Platforms' },
+  { href: '/services#mobile', label: 'Mobile Applications' },
+  { href: '/services#cloud', label: 'Cloud & Infrastructure' },
   { href: '/services#design', label: 'Product Design' },
+  { href: '/services#discovery', label: 'Discovery & Strategy' },
+  { href: '/services#audit', label: 'Code & Cloud Audits' },
 ];
 
-const STUDIO = [
+const STUDIO: Item[] = [
   { href: '/about', label: 'Studio' },
   { href: '/portfolio', label: 'Selected work' },
+  { href: '/about#team', label: 'Team' },
+  { href: '/about#values', label: 'How we work' },
   { href: '/contact', label: 'Contact' },
 ];
 
-const NETWORK = [
-  { href: 'https://github.com', label: 'GitHub' },
-  { href: 'https://www.linkedin.com', label: 'LinkedIn' },
-  { href: 'https://read.cv', label: 'Read.cv' },
+const RESOURCES: Item[] = [
+  { href: '/portfolio', label: 'Case studies' },
+  { href: '/services', label: 'Engagement models' },
+  { href: 'mailto:hello@imax.studio', label: 'hello@imax.studio', external: true },
+  { href: '/about', label: 'Hiring' },
+  { href: '/about', label: 'Press kit' },
+];
+
+const NETWORK: Item[] = [
+  { href: 'https://github.com', label: 'GitHub', external: true },
+  { href: 'https://www.linkedin.com', label: 'LinkedIn', external: true },
+  { href: 'https://read.cv', label: 'Read.cv', external: true },
+  { href: 'https://x.com', label: 'X / Twitter', external: true },
 ];
 
 export default function Footer() {
   return (
-    <footer className="mt-32 bg-ink text-[var(--color-paper)]">
-      {/* Big mark marquee */}
-      <div className="border-y border-[color:var(--color-paper)]/15 py-8">
-        <Marquee speed={88} className="text-[var(--color-paper)]">
-          <span className="font-display italic text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-            let&apos;s build something
-          </span>
-          <span className="font-display text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-            worth keeping —
-          </span>
-          <span className="font-display italic text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-            let&apos;s build something
-          </span>
-          <span className="font-display text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-            worth keeping —
-          </span>
-        </Marquee>
-      </div>
-
-      <div className="frame pt-20 pb-10">
-        <div className="grid gap-12 md:grid-cols-12">
-          {/* Left: contact pitch */}
-          <div className="md:col-span-5">
-            <div className="mono ink-faint mb-4" style={{ color: 'var(--color-paper-faint)' }}>
-              [ 01 — start a project ]
-            </div>
-            <h2 className="font-display text-[clamp(2.2rem,1.4rem+2vw,3.6rem)] leading-[0.95] tracking-tight mb-8" style={{ color: 'var(--color-paper)' }}>
-              Tell us what you&apos;re building.<br />
-              <em className="italic" style={{ color: 'var(--color-signal)' }}>We&apos;ll reply by tomorrow.</em>
-            </h2>
-            <div className="space-y-2">
-              <a href="mailto:hello@imax.studio" className="block font-display text-2xl u-link" style={{ color: 'var(--color-paper)' }}>
-                hello@imax.studio
-              </a>
-              <Link href="/contact" className="block mono u-link" style={{ color: 'var(--color-paper-mute)' }}>
-                Book a 30-min scoping call ↗
-              </Link>
-            </div>
+    <footer className="footer-dark mt-32">
+      <div className="frame pt-20 pb-12">
+        {/* Top — wordmark + tagline */}
+        <div className="grid grid-cols-12 gap-8 pb-16 hairline-b border-color-[rgba(244,243,238,0.1)]" style={{ borderColor: 'rgba(244,243,238,0.12)' }}>
+          <div className="col-span-12 md:col-span-5">
+            <Link
+              href="/"
+              aria-label="iMax — home"
+              className="inline-flex items-baseline gap-0 font-sans font-extrabold text-[1.35rem] tracking-[-0.04em] uppercase"
+              style={{ color: 'var(--color-paper)' }}
+            >
+              <span>IMAX</span>
+              <span aria-hidden="true" style={{ color: 'var(--color-signal)' }}>\</span>
+              <span>STUDIO</span>
+            </Link>
+            <p className="mt-6 max-w-[36ch] text-[1.0625rem]" style={{ color: 'var(--color-paper-mute)', fontFamily: 'var(--font-serif)' }}>
+              A small senior engineering studio. We design, build and ship durable software for ambitious teams — web, mobile, cloud.
+            </p>
           </div>
 
-          {/* Right: index columns */}
-          <div className="md:col-span-7 grid grid-cols-3 gap-6 max-sm:grid-cols-1">
-            <FCol title="Services" items={SERVICES} />
-            <FCol title="Studio" items={STUDIO} />
-            <FCol title="Elsewhere" items={NETWORK} external />
+          <div className="col-span-12 md:col-span-7 md:text-right flex md:justify-end items-start">
+            <Link href="/contact" className="btn btn-light">
+              Start a project
+            </Link>
           </div>
         </div>
 
-        <div className="mt-24 pt-6 border-t border-[color:var(--color-paper)]/15 flex flex-wrap items-center justify-between gap-3 mono" style={{ color: 'var(--color-paper-faint)' }}>
-          <span>© {new Date().getFullYear()} imax studio</span>
+        {/* Columns */}
+        <div className="grid grid-cols-12 gap-8 pt-16">
+          <FCol title="Services" items={SERVICES} />
+          <FCol title="Studio" items={STUDIO} />
+          <FCol title="Resources" items={RESOURCES} />
+          <FCol title="Elsewhere" items={NETWORK} />
+        </div>
+
+        {/* Bottom strip */}
+        <div
+          className="mt-20 pt-6 flex flex-wrap items-center justify-between gap-3 mono"
+          style={{ borderTop: '1px solid rgba(244,243,238,0.12)', color: 'var(--color-paper-faint)' }}
+        >
+          <span>© {new Date().getFullYear()} iMax Studio</span>
           <span>San Francisco · Remote-first</span>
-          <span>v.2026.05 — built in-house</span>
+          <span>v.2026.05</span>
         </div>
       </div>
     </footer>
   );
 }
 
-function FCol({ title, items, external }: { title: string; items: { href: string; label: string }[]; external?: boolean }) {
+function FCol({ title, items }: { title: string; items: Item[] }) {
   return (
-    <div>
-      <h4 className="mono mb-5" style={{ color: 'var(--color-paper-faint)' }}>{title}</h4>
+    <div className="col-span-6 md:col-span-3">
+      <h4 className="col-title">{title}</h4>
       <ul className="list-none p-0 space-y-3">
         {items.map((i) => (
-          <li key={i.href}>
-            {external ? (
-              <a
-                href={i.href}
-                target="_blank"
-                rel="noreferrer"
-                className="u-link text-base"
-                style={{ color: 'var(--color-paper)' }}
-              >
-                {i.label} ↗
+          <li key={i.href + i.label}>
+            {i.external ? (
+              <a href={i.href} target="_blank" rel="noreferrer">
+                {i.label}
               </a>
             ) : (
-              <Link href={i.href} className="u-link text-base" style={{ color: 'var(--color-paper)' }}>
-                {i.label}
-              </Link>
+              <Link href={i.href}>{i.label}</Link>
             )}
           </li>
         ))}

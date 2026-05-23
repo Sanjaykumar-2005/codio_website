@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Reveal from '../components/Reveal';
-import WordReveal from '../components/WordReveal';
 import ContactForm from '../components/ContactForm';
 import { IconMail, IconPin, IconClock } from '../components/Icon';
 
@@ -39,27 +38,21 @@ export default function ContactPage() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="frame pt-16 pb-16 max-md:pt-10 max-md:pb-10">
-        <div className="flex items-baseline justify-between hairline-b pb-3 mb-12">
-          <span className="mono ink-mute">[ 05 — contact ]</span>
-          <span className="live">Open · reply &lt; 24h</span>
-        </div>
-
-        <WordReveal
-          as="h1"
-          className="font-display leading-[0.93] tracking-[-0.04em] text-[clamp(3rem,1.6rem+6vw,9rem)]"
-          italic={[3, 4]}
-          signal={[4]}
-        >
-          Tell us what you&apos;re building.
-        </WordReveal>
-
-        <div className="grid grid-cols-12 gap-6 mt-10">
-          <div className="col-span-12 md:col-span-6 md:col-start-2">
-            <Reveal delay={250}>
-              <p className="text-lg ink-mute leading-relaxed">
+      <section className="frame pt-20 pb-20 max-md:pt-12 max-md:pb-12">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-10 items-start">
+          <div className="col-span-12 lg:col-span-8">
+            <Reveal>
+              <h1 className="font-sans font-extrabold leading-[1.02] tracking-[-0.035em] text-[clamp(2.6rem,1.6rem+5vw,5.2rem)]" style={{ color: 'var(--color-ink)' }}>
+                Tell us what you&apos;re <span className="u-word">building</span>.
+              </h1>
+            </Reveal>
+          </div>
+          <div className="col-span-12 lg:col-span-4 lg:pt-6">
+            <Reveal delay={150}>
+              <p className="text-[1.0625rem] md:text-[1.1875rem] leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>
                 One business day, no sales loop. Tell us where you are — first call, mid-build, or trying to rescue something. We&apos;ll come back with concrete next steps.
               </p>
+              <div className="mt-4"><span className="live">Open · reply &lt; 24h</span></div>
             </Reveal>
           </div>
         </div>
@@ -67,33 +60,33 @@ export default function ContactPage() {
 
       {/* ============ FORM + LINES ============ */}
       <section className="frame pb-24">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-16 items-start">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-16 items-start">
           {/* Left column — lines */}
           <aside className="col-span-12 md:col-span-4">
             <Reveal>
-              <div className="flex items-baseline gap-4 hairline-b pb-3 mb-8">
-                <span className="index">Direct lines</span>
+              <div className="hairline-b pb-3 mb-8">
+                <span className="mono">Direct lines</span>
               </div>
 
               <ul className="list-none p-0 space-y-6">
                 {LINES.map((l) => (
                   <li key={l.label}>
-                    <div className="flex items-baseline gap-3 mono ink-mute mb-1">
+                    <div className="flex items-baseline gap-3 mono mb-1">
                       <span aria-hidden="true">{l.icon}</span>
                       <span>{l.label}</span>
                     </div>
                     {l.href ? (
-                      <a href={l.href} className="font-display text-xl u-link ink" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                      <a href={l.href} className="font-sans font-semibold text-lg tracking-tight u-link" style={{ color: 'var(--color-ink)' }}>
                         {l.value}
                       </a>
                     ) : (
-                      <div className="font-display text-xl ink" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>{l.value}</div>
+                      <div className="font-sans font-semibold text-lg tracking-tight" style={{ color: 'var(--color-ink)' }}>{l.value}</div>
                     )}
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-12 hairline pt-6 mono ink-mute leading-relaxed">
+              <div className="mt-12 hairline pt-6 mono leading-relaxed">
                 Form goes straight to a founder. Avg. reply 4h 12m during business hours.
               </div>
             </Reveal>
@@ -102,9 +95,9 @@ export default function ContactPage() {
           {/* Right column — form */}
           <div className="col-span-12 md:col-span-7 md:col-start-6">
             <Reveal>
-              <div className="flex items-baseline gap-4 hairline-b pb-3 mb-8">
-                <span className="index">Project brief</span>
-                <span className="mono ink-faint">— 4 fields</span>
+              <div className="hairline-b pb-3 mb-8 flex items-baseline justify-between">
+                <span className="mono">Project brief</span>
+                <span className="mono">4 fields</span>
               </div>
               <ContactForm />
             </Reveal>
@@ -113,29 +106,24 @@ export default function ContactPage() {
       </section>
 
       {/* ============ FAQ ============ */}
-      <section className="frame py-28 max-md:py-16">
-        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
-          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">Frequently asked</span>
-            <span className="mono ink-faint">/ 02</span>
-          </div>
+      <section className="frame py-24 max-md:py-16">
+        <div className="mb-10 hairline-b pb-4">
+          <h2 className="font-sans font-bold text-[clamp(1.6rem,1.2rem+1vw,2.25rem)] tracking-[-0.022em]" style={{ color: 'var(--color-ink)' }}>
+            Frequently asked
+          </h2>
         </div>
 
         <div className="grid grid-cols-12 gap-6">
-          {FAQS.map((f, i) => (
-            <Reveal
-              key={f.q}
-              className={`col-span-12 md:col-span-6 ${i % 2 === 1 ? 'md:translate-y-10' : ''}`}
-              delay={i * 80}
-            >
+          {FAQS.map((f) => (
+            <Reveal key={f.q} className="col-span-12 md:col-span-6">
               <details className="hairline-b py-6 group">
-                <summary className="flex items-baseline justify-between cursor-none list-none">
-                  <h3 className="font-display text-2xl leading-tight tracking-tight" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                <summary className="flex items-baseline justify-between cursor-pointer list-none">
+                  <h3 className="font-sans font-bold text-xl leading-tight tracking-[-0.018em]" style={{ color: 'var(--color-ink)' }}>
                     {f.q}
                   </h3>
-                  <span className="mono ink-mute group-open:rotate-45 transition-transform duration-300">+</span>
+                  <span className="mono group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
-                <p className="text-base ink-mute leading-relaxed mt-4 max-w-[62ch]">{f.a}</p>
+                <p className="leading-relaxed mt-4 max-w-[62ch]" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>{f.a}</p>
               </details>
             </Reveal>
           ))}

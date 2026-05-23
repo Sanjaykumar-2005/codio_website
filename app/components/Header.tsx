@@ -3,14 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import MagneticButton from './MagneticButton';
 
 const LINKS = [
-  { href: '/', label: 'Index', n: '01' },
-  { href: '/services', label: 'Services', n: '02' },
-  { href: '/portfolio', label: 'Work', n: '03' },
-  { href: '/about', label: 'Studio', n: '04' },
-  { href: '/contact', label: 'Contact', n: '05' },
+  { href: '/services', label: 'Services' },
+  { href: '/portfolio', label: 'Work' },
+  { href: '/about', label: 'Studio' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -19,7 +17,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -34,26 +32,30 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-[background,backdrop-filter,border-color] duration-300 ${
-        scrolled
-          ? 'bg-[color:var(--color-paper)]/90 backdrop-blur-md border-b border-[var(--color-rule)]'
-          : 'bg-transparent border-b border-transparent'
+      className={`sticky top-0 z-40 transition-[background] duration-300 ${
+        scrolled ? 'bg-[var(--color-paper)]' : 'bg-[var(--color-paper)]'
       }`}
     >
-      <div className="frame flex items-center justify-between py-4">
-        <Link href="/" aria-label="iMax — home" className="group inline-flex items-baseline gap-1">
-          <span className="font-display italic text-2xl leading-none tracking-tight">imax</span>
-          <span className="signal text-xl leading-none">.</span>
-          <span className="mono ml-3 ink-mute hidden sm:inline">studio</span>
+      <div className="frame flex items-center justify-between py-5">
+        {/* Wordmark */}
+        <Link
+          href="/"
+          aria-label="iMax — home"
+          className="inline-flex items-baseline gap-0 font-sans font-extrabold text-[1.35rem] tracking-[-0.04em] uppercase"
+          style={{ color: 'var(--color-ink)' }}
+        >
+          <span>IMAX</span>
+          <span aria-hidden="true" style={{ color: 'var(--color-signal)' }}>\</span>
+          <span>STUDIO</span>
         </Link>
 
+        {/* Desktop nav */}
         <nav className="max-md:hidden">
-          <ul className="flex items-center gap-7 list-none p-0">
+          <ul className="flex items-center gap-9 list-none p-0">
             {LINKS.map((l) => {
-              const active = l.href === '/' ? pathname === '/' : pathname.startsWith(l.href);
+              const active = pathname.startsWith(l.href);
               return (
-                <li key={l.href} className="flex items-baseline gap-1.5">
-                  <span className="mono ink-faint">{l.n}</span>
+                <li key={l.href}>
                   <Link href={l.href} className={`nav-link ${active ? 'is-active' : ''}`}>
                     {l.label}
                   </Link>
@@ -63,20 +65,21 @@ export default function Header() {
           </ul>
         </nav>
 
+        {/* CTA pill */}
         <div className="flex items-center gap-3 max-md:hidden">
-          <span className="live">Open · Q3 intake</span>
-          <MagneticButton href="/contact" className="btn btn-primary">
+          <Link href="/contact" className="btn btn-primary">
             Start a project
-          </MagneticButton>
+          </Link>
         </div>
 
+        {/* Mobile toggle */}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
           aria-controls="mobile-nav"
-          className="hidden max-md:inline-grid place-items-center w-11 h-11 border border-[var(--color-ink)]"
+          className="hidden max-md:inline-grid place-items-center w-11 h-11 rounded-full border border-[var(--color-border)] bg-[var(--color-paper-2)]"
         >
           <span
             className={`block w-5 h-px bg-[var(--color-ink)] transition-transform duration-300 ${open ? 'translate-y-[3px] rotate-45' : '-translate-y-1'}`}
@@ -90,7 +93,7 @@ export default function Header() {
       {/* Mobile drawer */}
       <div
         id="mobile-nav"
-        className={`md:hidden fixed inset-0 top-[64px] bg-[var(--color-paper)] z-30 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`md:hidden fixed inset-0 top-[72px] bg-[var(--color-paper)] z-30 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
         aria-hidden={!open}
@@ -98,17 +101,16 @@ export default function Header() {
         <div className="frame pt-12 pb-16 h-full flex flex-col">
           <ul className="list-none p-0 space-y-1 flex-1">
             {LINKS.map((l) => {
-              const active = l.href === '/' ? pathname === '/' : pathname.startsWith(l.href);
+              const active = pathname.startsWith(l.href);
               return (
                 <li key={l.href} className="hairline-b">
                   <Link
                     href={l.href}
                     className="flex items-baseline justify-between py-5 group"
                   >
-                    <span className="mono ink-mute">{l.n}</span>
                     <span
-                      className={`font-display text-4xl leading-none tracking-tight ${active ? 'italic signal' : 'ink'}`}
-                      style={{ fontVariationSettings: active ? '"opsz" 144, "SOFT" 100' : '"opsz" 144, "SOFT" 40' }}
+                      className="font-sans font-bold text-3xl tracking-tight"
+                      style={{ color: active ? 'var(--color-ink)' : 'var(--color-ink-2)' }}
                     >
                       {l.label}
                     </span>
@@ -119,8 +121,9 @@ export default function Header() {
           </ul>
 
           <div className="pt-8 mt-auto">
-            <span className="live mb-4 block">Open · Q3 intake</span>
-            <Link href="/contact" className="btn btn-primary w-full justify-center">Start a project</Link>
+            <Link href="/contact" className="btn btn-primary w-full justify-center">
+              Start a project
+            </Link>
           </div>
         </div>
       </div>

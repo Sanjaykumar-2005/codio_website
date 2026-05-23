@@ -91,7 +91,7 @@ export default function ContactForm() {
                 key={b}
                 type="button"
                 onClick={() => setBudget(active ? '' : b)}
-                className={`px-4 py-1.5 mono border transition-colors ${
+                className={`px-4 py-1.5 mono rounded-full border transition-colors ${
                   active
                     ? 'bg-ink border-[var(--color-ink)] text-[var(--color-paper)]'
                     : 'bg-transparent border-[var(--color-rule-strong)] ink-mute hover:ink hover:border-[var(--color-ink)]'
@@ -116,11 +116,12 @@ export default function ContactForm() {
                 key={t}
                 type="button"
                 onClick={() => setTiming(active ? '' : t)}
-                className={`px-4 py-1.5 mono border transition-colors ${
+                className={`px-4 py-1.5 mono rounded-full border transition-colors ${
                   active
-                    ? 'bg-signal border-[var(--color-ink)] ink'
+                    ? 'border-[var(--color-ink)]'
                     : 'bg-transparent border-[var(--color-rule-strong)] ink-mute hover:ink hover:border-[var(--color-ink)]'
                 }`}
+                style={active ? { background: 'var(--color-ink)', color: 'var(--color-paper)' } : undefined}
               >
                 {t}
               </button>
@@ -155,8 +156,8 @@ export default function ContactForm() {
           role={status.kind === 'error' ? 'alert' : 'status'}
           className={
             status.kind === 'success'
-              ? 'mt-8 p-5 border border-[var(--color-ink)] bg-signal ink text-base'
-              : 'mt-8 p-5 border text-base'
+              ? 'mt-8 p-5 border border-[var(--color-ink)] text-base rounded-lg'
+              : 'mt-8 p-5 border text-base rounded-lg'
           }
           style={
             status.kind === 'error'
@@ -165,7 +166,7 @@ export default function ContactForm() {
                   background: 'var(--color-warn-tint)',
                   color: 'var(--color-warn)',
                 }
-              : undefined
+              : { background: 'rgba(107,122,61,0.10)', color: 'var(--color-success)', borderColor: 'var(--color-success)' }
           }
         >
           {status.message}

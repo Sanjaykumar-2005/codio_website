@@ -1,24 +1,24 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Geist, JetBrains_Mono } from 'next/font/google';
+import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Ticker from './components/Ticker';
-import Cursor from './components/Cursor';
 import ScrollProgress from './components/ScrollProgress';
+import PageTransition from './components/PageTransition';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+});
 
 const fraunces = Fraunces({
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-serif',
   display: 'swap',
   axes: ['opsz', 'SOFT'],
   style: ['normal', 'italic'],
-});
-
-const geist = Geist({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
 });
 
 const jetbrains = JetBrains_Mono({
@@ -45,20 +45,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#f6f3ec',
+  themeColor: '#f4f3ee',
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${geist.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jetbrains.variable}`}>
       <body>
-        <Cursor />
         <ScrollProgress />
-        <Ticker />
         <Header />
-        <main id="main">{children}</main>
+        <main id="main">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>

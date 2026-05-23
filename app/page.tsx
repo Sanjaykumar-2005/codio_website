@@ -1,151 +1,229 @@
 import Link from 'next/link';
 import Reveal from './components/Reveal';
-import WordReveal from './components/WordReveal';
-import MagneticButton from './components/MagneticButton';
-import LogoMarquee from './components/LogoMarquee';
 import StatCounter from './components/StatCounter';
-import Marquee from './components/Marquee';
-import CaseStack, { type Case } from './components/CaseStack';
+import ScrollExpand from './components/ScrollExpand';
 
-const SELECTED: Case[] = [
-  { n: '01', title: 'Checkout 2.0', client: 'Northwind Retail', discipline: 'Web · E-commerce', year: '2026' },
-  { n: '02', title: 'Cloud Re-Platform', client: 'Lumen Health', discipline: 'Cloud · Healthcare', year: '2025' },
-  { n: '03', title: 'Companion App', client: 'Roam Travel', discipline: 'Mobile · Travel', year: '2025' },
-  { n: '04', title: 'Trade Desk Dashboard', client: 'Finch Analytics', discipline: 'Web · Fintech', year: '2024' },
-  { n: '05', title: 'Driver App', client: 'Atlas Logistics', discipline: 'Mobile · Logistics', year: '2024' },
+type Release = {
+  title: string;
+  body: string;
+  date: string;
+  category: string;
+  cta: string;
+  href: string;
+};
+
+const SELECTED: Release[] = [
+  {
+    title: 'Checkout 2.0',
+    body: 'Rebuilt Northwind Retail’s legacy checkout into a Next.js + Stripe flow that lifted conversion 34% across mobile and desktop.',
+    date: 'April 16, 2026',
+    category: 'Web · E-commerce',
+    cta: 'Read the engagement',
+    href: '/portfolio',
+  },
+  {
+    title: 'Lumen Cloud Re-Platform',
+    body: 'Migrated a HIPAA-bound workload from EC2 to ECS Fargate with full IaC, 24/7 observability, and a 41% drop in monthly spend.',
+    date: 'February 4, 2026',
+    category: 'Cloud · Healthcare',
+    cta: 'Read the engagement',
+    href: '/portfolio',
+  },
+  {
+    title: 'Roam Companion App',
+    body: 'A cross-platform React Native app with offline-first itineraries — iOS and Android shipped on the same day, 4.8★ in the App Store.',
+    date: 'January 30, 2026',
+    category: 'Mobile · Travel',
+    cta: 'Read the engagement',
+    href: '/portfolio',
+  },
 ];
 
 const SERVICES = [
   { n: '01', name: 'Web Platforms', sub: 'Next.js · React · TypeScript' },
   { n: '02', name: 'Mobile Applications', sub: 'React Native · Swift · Kotlin' },
-  { n: '03', name: 'Cloud & Infra', sub: 'AWS · GCP · Terraform · K8s' },
+  { n: '03', name: 'Cloud & Infrastructure', sub: 'AWS · GCP · Terraform · K8s' },
   { n: '04', name: 'Product Design', sub: 'Discovery · UX · Design Systems' },
-];
-
-const PROCESS = [
-  { n: '01', label: 'Scope', body: 'A 30-minute call. We turn a fuzzy ask into a one-page brief with budget and timeline before you sign anything.' },
-  { n: '02', label: 'Shape', body: 'Two weeks. Discovery, UX, technical spike. Output is a working prototype and a concrete plan.' },
-  { n: '03', label: 'Ship', body: 'Six to twelve weeks. Weekly demos, Linear access, real commits. We ship to production every Friday.' },
-  { n: '04', label: 'Sustain', body: 'Optional retainer. Observability, performance work, and roadmap pairing with your in-house team.' },
 ];
 
 export default function HomePage() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="frame relative pt-16 pb-24 max-md:pt-10 max-md:pb-16">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-8 items-end">
-          <div className="col-span-12 flex items-baseline justify-between hairline-b pb-3">
-            <span className="mono ink-mute">[ 00 — index ]</span>
-            <span className="mono ink-mute hidden md:inline">2017 / ongoing</span>
-            <span className="mono ink-faint">EST. iMax Studio</span>
+      <section className="frame pt-20 pb-28 max-md:pt-12 max-md:pb-16">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-12 items-start">
+          {/* Left: bold sans h1 with underlined keywords */}
+          <div className="col-span-12 lg:col-span-8">
+            <Reveal>
+              <h1
+                className="font-sans font-extrabold leading-[1.02] tracking-[-0.035em] text-[clamp(2.8rem,1.6rem+5.6vw,5.6rem)]"
+                style={{ color: 'var(--color-ink)' }}
+              >
+                Senior <span className="u-word">engineering</span> and <span className="u-word">design</span> for software that has to keep working
+              </h1>
+            </Reveal>
           </div>
 
-          <div className="col-span-12">
-            <WordReveal
-              as="h1"
-              className="font-display leading-[0.92] tracking-[-0.04em] text-[clamp(3.4rem,1rem+10vw,11.5rem)] mt-12"
-              italic={[4, 5, 6]}
-              signal={[4]}
-            >
-              We engineer software that earns its place.
-            </WordReveal>
-          </div>
-
-          <div className="col-span-12 md:col-span-5 md:col-start-2 mt-10">
-            <Reveal delay={300}>
-              <p className="text-lg md:text-xl ink-mute leading-relaxed mb-8">
-                iMax is a senior engineering studio working with founders and product teams on web platforms, mobile apps and cloud infrastructure that have to keep working after we leave.
+          {/* Right: serif body */}
+          <div className="col-span-12 lg:col-span-4 lg:pt-6">
+            <Reveal delay={150}>
+              <p
+                className="text-[1.0625rem] md:text-[1.1875rem] leading-relaxed"
+                style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}
+              >
+                iMax is a small senior engineering studio. We partner with founders and product teams to design, build, and ship web platforms, mobile apps, and cloud infrastructure that survive their first quarter.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
-                <MagneticButton href="/contact" className="btn btn-primary">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link href="/contact" className="btn btn-primary">
                   Start a project
-                </MagneticButton>
-                <Link href="/portfolio" className="btn">Selected work</Link>
+                </Link>
+                <Link href="/portfolio" className="btn btn-secondary">
+                  Selected work
+                </Link>
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
 
-          <div className="col-span-12 md:col-span-4 md:col-start-9 mt-10">
-            <Reveal delay={500}>
-              <div className="flex items-baseline gap-3 mb-4">
-                <span className="live">Studio status</span>
-                <span className="mono ink-faint">— live</span>
-              </div>
-              <p className="text-base ink leading-relaxed">
-                Two slots open for <em className="italic signal">August 2026</em>. Most projects start with a 30-minute call. No deck, no follow-up sequence.
+      {/* ============ FEATURED ENGAGEMENT (Project-Glasswing scroll-expand) ============ */}
+      <ScrollExpand travel={1.4}>
+        <article className="feature-panel">
+          <div className="feature-panel-inner">
+            {/* Copy */}
+            <div>
+              <h2
+                className="font-serif-display"
+                style={{ fontSize: 'clamp(2.6rem, 1.4rem + 4vw, 5rem)', color: 'var(--color-paper)' }}
+              >
+                Project<br />Northwind
+              </h2>
+              <p className="feature-sub">
+                Rebuilding the checkout that carries 18M sessions a year.
               </p>
-              <div className="mt-8 hairline pt-5 mono ink-mute">
-                Avg. response 4h 12m · last reply 09:42 PT
+              <div className="mt-10">
+                <Link href="/portfolio" className="btn btn-light">
+                  Continue reading
+                </Link>
               </div>
+            </div>
+
+            {/* Art (kinetic SVG) */}
+            <div className="feature-art">
+              <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <pattern id="dot" width="6" height="6" patternUnits="userSpaceOnUse">
+                    <circle cx="1" cy="1" r="0.7" fill="rgba(244,243,238,0.18)" />
+                  </pattern>
+                  <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stopColor="rgba(244,243,238,0.22)" />
+                    <stop offset="1" stopColor="rgba(244,243,238,0.02)" />
+                  </linearGradient>
+                </defs>
+                <rect width="600" height="600" fill="url(#dot)" />
+                <g fill="none" stroke="rgba(244,243,238,0.55)" strokeWidth="0.9">
+                  <path d="M40 480 Q 160 220 280 360 T 540 180" />
+                  <path d="M120 540 Q 240 320 360 420 T 580 260" />
+                  <path d="M60 320 Q 200 120 320 240 T 560 100" />
+                  <path d="M100 200 Q 220 80  320 200 T 560 360" />
+                </g>
+                <g fill="none" stroke="rgba(201,100,66,0.45)" strokeWidth="0.7">
+                  <path d="M40 80 Q 200 260 360 180 T 560 460" />
+                </g>
+                <rect x="0" y="0" width="600" height="600" fill="url(#g)" />
+              </svg>
+              <span className="badge">imax.studio / case-01</span>
+            </div>
+          </div>
+        </article>
+      </ScrollExpand>
+
+      {/* ============ LATEST ENGAGEMENTS (3 release cards) ============ */}
+      <section className="frame py-20 max-md:py-12">
+        <div className="mb-10">
+          <h2
+            className="font-sans font-bold text-[clamp(1.6rem,1.2rem+1vw,2.25rem)] tracking-[-0.022em]"
+            style={{ color: 'var(--color-ink)' }}
+          >
+            Latest engagements
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-12 gap-6">
+          {SELECTED.map((r) => (
+            <Reveal key={r.title} className="col-span-12 md:col-span-4">
+              <article className="release-card">
+                <h3 className="release-title">{r.title}</h3>
+                <p className="release-body">{r.body}</p>
+
+                <div className="release-meta">
+                  <div className="release-meta-row">
+                    <span className="label">Date</span>
+                    <span className="value">{r.date}</span>
+                  </div>
+                  <div className="release-meta-row">
+                    <span className="label">Discipline</span>
+                    <span className="value">{r.category}</span>
+                  </div>
+                </div>
+
+                <div className="release-cta">
+                  <Link href={r.href} className="btn btn-primary">
+                    {r.cta}
+                  </Link>
+                </div>
+              </article>
             </Reveal>
-          </div>
+          ))}
         </div>
-      </section>
-
-      {/* ============ KINETIC HEADLINE STRIP ============ */}
-      <section aria-hidden="true" className="py-6 border-y border-[var(--color-rule)] bg-paper-2">
-        <Marquee speed={68} className="marquee-display">
-          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-            Senior engineering
-          </span>
-          <span className="font-display italic text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12 signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-            end&nbsp;to&nbsp;end
-          </span>
-          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12">
-            ·
-          </span>
-          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-            web · mobile · cloud
-          </span>
-          <span className="font-display italic text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12 signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-            shipped&nbsp;fridays
-          </span>
-          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12">
-            ·
-          </span>
-        </Marquee>
-      </section>
-
-      {/* ============ TRUSTED BY ============ */}
-      <section className="py-16 max-md:py-10">
-        <div className="frame">
-          <div className="flex items-baseline justify-between hairline-b pb-3 mb-10">
-            <span className="index">In rotation</span>
-            <span className="mono ink-faint">2024 — 2026</span>
-          </div>
-        </div>
-        <LogoMarquee />
-      </section>
-
-      {/* ============ SELECTED WORK ============ */}
-      <section className="frame py-24 max-md:py-16">
-        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-2">
-          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">Selected work</span>
-            <span className="mono ink-faint">/ 02</span>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:text-right">
-            <Link href="/portfolio" className="u-link mono ink">All projects ↗</Link>
-          </div>
-        </div>
-
-        <CaseStack cases={SELECTED} />
 
         <div className="mt-10 flex items-baseline justify-between">
-          <span className="mono ink-mute">5 of 24 shown</span>
-          <Link href="/portfolio" className="btn">Open the archive</Link>
+          <span className="mono">Three of twenty-four shown</span>
+          <Link href="/portfolio" className="btn btn-secondary">
+            All projects
+          </Link>
         </div>
       </section>
 
-      {/* ============ SERVICES SLAB ============ */}
-      <section className="frame py-24 max-md:py-16">
-        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-2">
-          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">What we do</span>
-            <span className="mono ink-faint">/ 03</span>
+      {/* ============ MANIFESTO (serif headline + serif body) ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-12">
+          <div className="col-span-12 md:col-span-6">
+            <Reveal>
+              <h2
+                className="font-serif-display"
+                style={{ fontSize: 'clamp(2.2rem, 1.4rem + 3vw, 4.4rem)', color: 'var(--color-ink)' }}
+              >
+                We don’t sell sprints. We sell things that survive their first quarter.
+              </h2>
+            </Reveal>
           </div>
-          <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
+
+          <div className="col-span-12 md:col-span-5 md:col-start-8 md:pt-4">
+            <Reveal delay={150}>
+              <p className="mb-5 leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>
+                Most software fails not at launch but at month four — when the demo wears off and the actual scale arrives. We design for that month. Senior people on every project, no juniors learning on your timeline, no agency-of-agency relay.
+              </p>
+              <p className="leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>
+                Every Friday you get a deploy and a one-page note. Every Monday we’re in your standup. That’s the whole rhythm.
+              </p>
+              <Link href="/about" className="btn btn-secondary mt-8">
+                Read the studio brief
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SERVICES (editorial slab) ============ */}
+      <section className="frame py-20 max-md:py-12">
+        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-2">
+          <div className="col-span-12 md:col-span-8">
+            <h2 className="font-sans font-bold text-[clamp(1.6rem,1.2rem+1vw,2.25rem)] tracking-[-0.022em]" style={{ color: 'var(--color-ink)' }}>
+              What we do
+            </h2>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:text-right mono">
             Four disciplines, one team
           </div>
         </div>
@@ -159,104 +237,38 @@ export default function HomePage() {
             >
               <span className="slab-idx ink-mute">{s.n}</span>
               <span className="slab-title">{s.name}</span>
-              <span className="mono ink-mute justify-self-end">{s.sub}</span>
+              <span className="mono justify-self-end">{s.sub}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ============ MANIFESTO + STATS ============ */}
-      <section className="frame py-28 max-md:py-16">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-12">
-          <div className="col-span-12 md:col-span-6">
-            <span className="index">Manifesto</span>
-            <WordReveal
-              as="h2"
-              className="font-display leading-[0.96] tracking-[-0.03em] text-[clamp(2.4rem,1.6rem+2.6vw,4.6rem)] mt-6"
-              italic={[6, 7, 8, 9, 10, 11]}
-              signal={[8]}
-            >
-              We don&apos;t sell sprints. We sell things that survive their first quarter.
-            </WordReveal>
-          </div>
-
-          <div className="col-span-12 md:col-span-5 md:col-start-8">
-            <Reveal>
-              <p className="text-base ink-mute mb-6 leading-relaxed">
-                Most software fails not at launch but at month four — when the demo wears off and the actual scale arrives. We design for that month. Senior people on every project, no juniors learning on your timeline, no agency-of-agency relay.
-              </p>
-              <p className="text-base ink-mute leading-relaxed">
-                Every Friday you get a deploy and a one-page note. Every Monday we&apos;re in your standup. That&apos;s the whole rhythm.
-              </p>
-              <Link href="/about" className="btn btn-bare mt-8">Read the studio brief</Link>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* Stats — solid ink, no gradients */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12 mt-24 hairline pt-12">
-          <Stat n="01" value={<><StatCounter target={124} suffix="" /></>} label="Projects shipped" sub="2017 — 2026" />
-          <Stat n="02" value={<><StatCounter target={41} suffix="" /></>} label="Active partners" sub="across 6 industries" />
-          <Stat n="03" value={<><StatCounter target={99.9} suffix="%" decimals={1} /></>} label="Uptime delivered" sub="rolling 12 months" />
-          <Stat n="04" value={<><StatCounter target={11} suffix="d" /></>} label="Median kickoff" sub="brief → first commit" />
+      {/* ============ NUMBERS ============ */}
+      <section className="frame py-24 max-md:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 hairline pt-12">
+          <Stat n="01" value={<StatCounter target={124} />} label="Projects shipped" sub="2017 — 2026" />
+          <Stat n="02" value={<StatCounter target={41} />} label="Active partners" sub="across 6 industries" />
+          <Stat n="03" value={<StatCounter target={99.9} suffix="%" decimals={1} />} label="Uptime delivered" sub="rolling 12 months" />
+          <Stat n="04" value={<StatCounter target={11} suffix="d" />} label="Median kickoff" sub="brief → first commit" />
         </div>
       </section>
 
-      {/* ============ PROCESS ============ */}
-      <section className="frame py-28 max-md:py-16">
-        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
-          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">How we work</span>
-            <span className="mono ink-faint">/ 04</span>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            scope → shape → ship → sustain
-          </div>
-        </div>
-
-        <div className="grid grid-cols-12 gap-6">
-          {PROCESS.map((p, i) => (
-            <Reveal
-              key={p.n}
-              className={`col-span-12 md:col-span-6 ${i === 1 ? 'md:translate-y-12' : ''} ${i === 3 ? 'md:translate-y-12' : ''}`}
-              delay={i * 90}
-            >
-              <article className="hairline-b pb-10">
-                <div className="flex items-baseline gap-4 mb-5">
-                  <span className="font-display text-7xl tracking-tight leading-none ink-faint" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                    {p.n}
-                  </span>
-                  <h3 className="font-display italic text-3xl tracking-tight leading-none signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-                    {p.label}
-                  </h3>
-                </div>
-                <p className="text-base ink-mute leading-relaxed">{p.body}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ============ TESTIMONIAL CARD ============ */}
-      <section className="frame py-28 max-md:py-16">
-        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
-          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">In their words</span>
-            <span className="mono ink-faint">/ 05</span>
-          </div>
-        </div>
-
+      {/* ============ TESTIMONIAL (pull-quote style) ============ */}
+      <section className="frame py-24 max-md:py-16">
         <Reveal>
           <blockquote className="grid grid-cols-12 gap-6">
             <div className="col-span-12 md:col-span-10 md:col-start-2">
-              <p className="font-display text-[clamp(1.8rem,1.2rem+2vw,3.4rem)] leading-[1.08] tracking-[-0.025em]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&ldquo;</span>
-                iMax rebuilt our checkout in six weeks and we lifted conversion thirty-four percent. They were senior, fast, and the code is the cleanest we have ever inherited. They feel like part of us — the bar is permanently higher now.
-                <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&rdquo;</span>
+              <p
+                className="font-serif-display italic"
+                style={{ fontSize: 'clamp(1.8rem, 1.2rem + 2vw, 3.2rem)', lineHeight: '1.18', color: 'var(--color-ink)' }}
+              >
+                “iMax rebuilt our checkout in six weeks and we lifted conversion thirty-four percent. They were senior, fast, and the code is the cleanest we have ever inherited. The bar is permanently higher now.”
               </p>
               <footer className="mt-8 hairline pt-5 flex flex-wrap items-baseline gap-3">
-                <cite className="not-italic font-display text-xl">Maria Chen</cite>
-                <span className="mono ink-mute">Head of Product · Northwind Retail</span>
+                <cite className="not-italic font-sans font-semibold text-lg" style={{ color: 'var(--color-ink)' }}>
+                  Maria Chen
+                </cite>
+                <span className="mono">Head of Product · Northwind Retail</span>
               </footer>
             </div>
           </blockquote>
@@ -264,31 +276,27 @@ export default function HomePage() {
       </section>
 
       {/* ============ CTA — bold ink slab ============ */}
-      <section className="frame py-28 max-md:py-16">
+      <section className="frame pb-24 max-md:pb-16">
         <Reveal>
-          <div className="bg-ink p-12 md:p-20 relative overflow-hidden">
-            <div className="grid grid-cols-12 gap-6 items-end relative z-10">
-              <div className="col-span-12 md:col-span-8">
-                <span className="mono" style={{ color: 'var(--color-paper-faint)' }}>[ 06 — outro ]</span>
-                <h2 className="font-display mt-6 text-[clamp(2.6rem,1.4rem+4vw,6rem)] leading-[0.94] tracking-[-0.03em]" style={{ color: 'var(--color-paper)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                  Got something <em className="italic" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>worth building?</em>
+          <div className="feature-panel">
+            <div className="feature-panel-inner" style={{ gridTemplateColumns: '1.4fr 1fr', minHeight: '320px' }}>
+              <div>
+                <h2
+                  className="font-sans font-extrabold leading-[1.02] tracking-[-0.03em]"
+                  style={{ fontSize: 'clamp(2.4rem, 1.4rem + 3.5vw, 4.6rem)', color: 'var(--color-paper)' }}
+                >
+                  Got something <span style={{ color: 'var(--color-signal-soft)' }}>worth building?</span>
                 </h2>
-              </div>
-              <div className="col-span-12 md:col-span-4 md:text-right">
-                <MagneticButton href="/contact" className="btn btn-signal">
-                  Start a project
-                </MagneticButton>
-                <p className="mono mt-6" style={{ color: 'var(--color-paper-faint)' }}>
-                  hello@imax.studio · reply &lt; 24h
+                <p className="feature-sub" style={{ color: 'var(--color-paper-mute)' }}>
+                  Tell us what you’re working on. We’ll reply by tomorrow.
                 </p>
               </div>
+              <div className="md:text-right flex md:justify-end items-start md:items-center">
+                <Link href="/contact" className="btn btn-light">
+                  Start a project
+                </Link>
+              </div>
             </div>
-
-            {/* big watermark numeral */}
-            <span aria-hidden="true" className="font-display absolute -right-6 -bottom-12 text-[28rem] leading-none tracking-[-0.06em] opacity-10 select-none pointer-events-none"
-                  style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-              ↗
-            </span>
           </div>
         </Reveal>
       </section>
@@ -300,13 +308,15 @@ function Stat({ n, value, label, sub }: { n: string; value: React.ReactNode; lab
   return (
     <Reveal>
       <div className="flex flex-col gap-3">
-        <span className="mono ink-faint">{n}</span>
-        <span className="stat-num text-[clamp(3.2rem,2rem+4vw,6rem)] tabular-nums">
+        <span className="mono">{n}</span>
+        <span className="stat-num text-[clamp(2.6rem,1.6rem+3vw,4.5rem)] tabular-nums">
           {value}
         </span>
         <div className="hairline pt-3">
-          <div className="font-display text-base tracking-tight">{label}</div>
-          <div className="mono ink-mute mt-1">{sub}</div>
+          <div className="font-sans font-semibold text-base tracking-tight" style={{ color: 'var(--color-ink)' }}>
+            {label}
+          </div>
+          <div className="mono mt-1">{sub}</div>
         </div>
       </div>
     </Reveal>

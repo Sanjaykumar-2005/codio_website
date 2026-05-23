@@ -6,7 +6,7 @@ import StatCounter from '../components/StatCounter';
 export const metadata: Metadata = {
   title: 'Studio — Engineers, designers, strategists',
   description:
-    'iMax is an eight-person engineering studio. Senior, end-to-end, deliberately small.',
+    'Codio is an eight-person engineering studio. Senior, end-to-end, deliberately small.',
 };
 
 const VALUES = [
@@ -57,7 +57,7 @@ export default function AboutPage() {
           <div className="col-span-12 lg:col-span-4 lg:pt-6">
             <Reveal delay={150}>
               <p className="text-[1.0625rem] md:text-[1.1875rem] leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>
-                iMax began as a two-person studio in San Francisco — a backend engineer and a designer tired of well-funded ideas dying in long discovery phases. Today we are eight, deliberately small, and still hands-on.
+                Codio began as a two-person studio in San Francisco — a backend engineer and a designer tired of well-funded ideas dying in long discovery phases. Today we are eight, deliberately small, and still hands-on.
               </p>
               <p className="mt-5 leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>
                 Every project gets senior attention because there is no one for it to roll downhill to.
@@ -112,8 +112,8 @@ export default function AboutPage() {
         <div className="grid grid-cols-12 gap-x-8 gap-y-2">
           {TEAM.map((p) => (
             <Reveal key={p.name} className="col-span-12 md:col-span-6">
-              <article className="hairline-b py-8 grid grid-cols-[88px_1fr_auto] gap-6 items-baseline">
-                <div className="font-sans font-extrabold text-[3rem] leading-none tracking-[-0.04em]" style={{ color: 'var(--color-ink-faint)' }}>
+              <article className="hairline-b py-8 grid grid-cols-[56px_1fr] sm:grid-cols-[72px_1fr_auto] gap-x-4 gap-y-2 sm:gap-x-6 items-baseline">
+                <div className="font-sans font-extrabold text-[2.4rem] sm:text-[3rem] leading-none tracking-[-0.04em]" style={{ color: 'var(--color-ink-faint)' }}>
                   {p.initials}
                 </div>
                 <div>
@@ -121,7 +121,7 @@ export default function AboutPage() {
                   <div className="mono mt-1">{p.role}</div>
                   <p className="mt-3 max-w-[42ch] leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}>{p.bio}</p>
                 </div>
-                <div className="mono text-right">{p.tag}</div>
+                <div className="mono sm:text-right col-start-2 sm:col-start-3 -mt-1 sm:mt-0">{p.tag}</div>
               </article>
             </Reveal>
           ))}
@@ -131,8 +131,8 @@ export default function AboutPage() {
       {/* ============ CTA ============ */}
       <section className="frame pb-24 max-md:pb-16">
         <Reveal>
-          <div className="feature-panel">
-            <div className="feature-panel-inner" style={{ minHeight: '320px' }}>
+          <div className="feature-panel cta-panel">
+            <div className="feature-panel-inner">
               <div>
                 <h2 className="font-sans font-extrabold leading-[1.02] tracking-[-0.03em]" style={{ fontSize: 'clamp(2.4rem, 1.4rem + 3.5vw, 4.4rem)', color: 'var(--color-paper)' }}>
                   Bring us in <span style={{ color: 'var(--color-signal-soft)' }}>early</span>. Or late. We’ve seen both.

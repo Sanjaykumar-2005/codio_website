@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   iMax · Warm Editorial (Anthropic pattern)
+   Codio · Warm Editorial (Anthropic pattern)
    Cream paper · Warm ink · Terracotta accent (sparing)
    Inter (display & UI, bold) · Fraunces (body serif) · JetBrains Mono (labels)
    ============================================================ */
@@ -456,8 +456,14 @@ main section p:not(.mono):not([class*="text-xs"]):not([class*="text-sm"]) {
   padding: clamp(2.5rem, 1.5rem + 3vw, 5rem);
   min-height: 540px;
 }
+/* CTA variants have less content — shorter and weighted 1.4:1 on desktop */
+.feature-panel.cta-panel .feature-panel-inner {
+  min-height: 280px;
+  grid-template-columns: 1.4fr 1fr;
+}
 @media (max-width: 840px) {
-  .feature-panel-inner {
+  .feature-panel-inner,
+  .feature-panel.cta-panel .feature-panel-inner {
     grid-template-columns: 1fr;
     min-height: auto;
   }
@@ -811,8 +817,8 @@ main section p:not(.mono):not([class*="text-xs"]):not([class*="text-sm"]) {
 .service-slab .slab-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2rem, 1.4rem + 2.2vw, 3.5rem);
-  line-height: 1.0;
+  font-size: clamp(1.6rem, 1rem + 2.4vw, 3.5rem);
+  line-height: 1.05;
   letter-spacing: -0.025em;
 }
 .service-slab:hover {
@@ -825,6 +831,16 @@ main section p:not(.mono):not([class*="text-xs"]):not([class*="text-sm"]) {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
+}
+
+@media (max-width: 768px) {
+  .service-slab {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding: 1.5rem 0;
+  }
+  .service-slab > .mono { justify-self: start; }
+  .service-slab:hover { padding-left: 0.75rem; }
 }
 
 /* Stat numerals */
@@ -924,6 +940,50 @@ main section p:not(.mono):not([class*="text-xs"]):not([class*="text-sm"]) {
   color: var(--color-paper);
   letter-spacing: -0.01em;
 }
+
+/* ---------- Mobile polish ---------- */
+@media (max-width: 640px) {
+  /* Slightly tighter frame padding so content reaches edges */
+  .frame, .frame-wide { padding-inline: 1.25rem; }
+
+  /* Reduce wordmark size so it fits with the burger button on small phones */
+  header a[aria-label="Codio — home"] { font-size: 1.1rem !important; }
+
+  /* Release cards don't need a tall min-height on phones */
+  .release-card { min-height: 0; padding: 22px 22px 20px; }
+  .release-card .release-title { font-size: 1.45rem; }
+
+  /* Feature panel inner padding tightens */
+  .feature-panel-inner { padding: 1.75rem 1.5rem; gap: 1.5rem; min-height: auto !important; }
+  .feature-panel { border-radius: 14px; }
+  .feature-panel .feature-art { aspect-ratio: 4 / 3; }
+  .feature-panel .feature-sub { font-size: 1rem; }
+
+  /* Buttons get slightly more breathing room and never overflow */
+  .btn { padding: 0.65rem 1.1rem; font-size: 0.875rem; }
+
+  /* Mono labels stay readable */
+  .mono { font-size: 0.7rem; }
+
+  /* Footer columns: 2-up on small phones reads better than 4-up */
+  .footer-dark .col-title { font-size: 1rem; margin-bottom: 0.9rem; }
+
+  /* Stat numerals stay tight */
+  .stat-num { letter-spacing: -0.03em; }
+
+  /* Pull-quote doesn't run off the edge */
+  .pull-quote { padding-left: 0.9rem; margin: 1.25rem 0; }
+
+  /* Tables already stack via .table-edit rules */
+}
+
+/* Tablet portrait — keep grids 2-up not 4-up where it gets cramped */
+@media (max-width: 840px) {
+  .frame, .frame-wide { width: min(720px, 94vw); }
+}
+
+/* Make all anchored sections clear the sticky header */
+:where(section[id], div[id]) { scroll-margin-top: 96px; }
 
 /* ---------- Page transition ---------- */
 .page-transition {

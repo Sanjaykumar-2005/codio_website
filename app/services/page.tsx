@@ -168,8 +168,8 @@ export default function ServicesPage() {
       {/* ============ CTA — dark feature panel ============ */}
       <section className="frame pb-24 max-md:pb-16">
         <Reveal>
-          <div className="feature-panel">
-            <div className="feature-panel-inner" style={{ minHeight: '320px' }}>
+          <div className="feature-panel cta-panel">
+            <div className="feature-panel-inner">
               <div>
                 <h2
                   className="font-sans font-extrabold leading-[1.02] tracking-[-0.03em]"

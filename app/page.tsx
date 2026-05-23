@@ -71,7 +71,7 @@ export default function HomePage() {
                 className="text-[1.0625rem] md:text-[1.1875rem] leading-relaxed"
                 style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-ink-2)' }}
               >
-                iMax is a small senior engineering studio. We partner with founders and product teams to design, build, and ship web platforms, mobile apps, and cloud infrastructure that survive their first quarter.
+                Codio is a small senior engineering studio. We partner with founders and product teams to design, build, and ship web platforms, mobile apps, and cloud infrastructure that survive their first quarter.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href="/contact" className="btn btn-primary">
@@ -132,7 +132,7 @@ export default function HomePage() {
                 </g>
                 <rect x="0" y="0" width="600" height="600" fill="url(#g)" />
               </svg>
-              <span className="badge">imax.studio / case-01</span>
+              <span className="badge">codio.studio / case-01</span>
             </div>
           </div>
         </article>
@@ -262,7 +262,7 @@ export default function HomePage() {
                 className="font-serif-display italic"
                 style={{ fontSize: 'clamp(1.8rem, 1.2rem + 2vw, 3.2rem)', lineHeight: '1.18', color: 'var(--color-ink)' }}
               >
-                “iMax rebuilt our checkout in six weeks and we lifted conversion thirty-four percent. They were senior, fast, and the code is the cleanest we have ever inherited. The bar is permanently higher now.”
+                “Codio rebuilt our checkout in six weeks and we lifted conversion thirty-four percent. They were senior, fast, and the code is the cleanest we have ever inherited. The bar is permanently higher now.”
               </p>
               <footer className="mt-8 hairline pt-5 flex flex-wrap items-baseline gap-3">
                 <cite className="not-italic font-sans font-semibold text-lg" style={{ color: 'var(--color-ink)' }}>
@@ -278,12 +278,12 @@ export default function HomePage() {
       {/* ============ CTA — bold ink slab ============ */}
       <section className="frame pb-24 max-md:pb-16">
         <Reveal>
-          <div className="feature-panel">
-            <div className="feature-panel-inner" style={{ gridTemplateColumns: '1.4fr 1fr', minHeight: '320px' }}>
+          <div className="feature-panel cta-panel">
+            <div className="feature-panel-inner">
               <div>
                 <h2
                   className="font-sans font-extrabold leading-[1.02] tracking-[-0.03em]"
-                  style={{ fontSize: 'clamp(2.4rem, 1.4rem + 3.5vw, 4.6rem)', color: 'var(--color-paper)' }}
+                  style={{ fontSize: 'clamp(2.2rem, 1.4rem + 3vw, 4.4rem)', color: 'var(--color-paper)' }}
                 >
                   Got something <span style={{ color: 'var(--color-signal-soft)' }}>worth building?</span>
                 </h2>

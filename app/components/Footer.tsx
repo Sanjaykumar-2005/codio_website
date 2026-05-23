@@ -22,7 +22,7 @@ const STUDIO: Item[] = [
 const RESOURCES: Item[] = [
   { href: '/portfolio', label: 'Case studies' },
   { href: '/services', label: 'Engagement models' },
-  { href: 'mailto:hello@imax.studio', label: 'hello@imax.studio', external: true },
+  { href: 'mailto:hello@codio.studio', label: 'hello@codio.studio', external: true },
   { href: '/about', label: 'Hiring' },
   { href: '/about', label: 'Press kit' },
 ];
@@ -43,11 +43,11 @@ export default function Footer() {
           <div className="col-span-12 md:col-span-5">
             <Link
               href="/"
-              aria-label="iMax — home"
+              aria-label="Codio — home"
               className="inline-flex items-baseline gap-0 font-sans font-extrabold text-[1.35rem] tracking-[-0.04em] uppercase"
               style={{ color: 'var(--color-paper)' }}
             >
-              <span>IMAX</span>
+              <span>CODIO</span>
               <span aria-hidden="true" style={{ color: 'var(--color-signal)' }}>\</span>
               <span>STUDIO</span>
             </Link>
@@ -76,7 +76,7 @@ export default function Footer() {
           className="mt-20 pt-6 flex flex-wrap items-center justify-between gap-3 mono"
           style={{ borderTop: '1px solid rgba(244,243,238,0.12)', color: 'var(--color-paper-faint)' }}
         >
-          <span>© {new Date().getFullYear()} iMax Studio</span>
+          <span>© {new Date().getFullYear()} Codio Studio</span>
           <span>San Francisco · Remote-first</span>
           <span>v.2026.05</span>
         </div>

@@ -40,11 +40,11 @@ export default function Header() {
         {/* Wordmark */}
         <Link
           href="/"
-          aria-label="iMax — home"
+          aria-label="Codio — home"
           className="inline-flex items-baseline gap-0 font-sans font-extrabold text-[1.35rem] tracking-[-0.04em] uppercase"
           style={{ color: 'var(--color-ink)' }}
         >
-          <span>IMAX</span>
+          <span>CODIO</span>
           <span aria-hidden="true" style={{ color: 'var(--color-signal)' }}>\</span>
           <span>STUDIO</span>
         </Link>

@@ -5,7 +5,7 @@ import PortfolioGrid from '../components/PortfolioGrid';
 
 export const metadata: Metadata = {
   title: 'Selected work — Archive 2024 — 2026',
-  description: 'A selection of recent iMax engagements across web, mobile and cloud.',
+  description: 'A selection of recent Codio engagements across web, mobile and cloud.',
 };
 
 export default function PortfolioPage() {
@@ -40,8 +40,8 @@ export default function PortfolioPage() {
       {/* ============ CTA ============ */}
       <section className="frame pb-24 max-md:pb-16">
         <Reveal>
-          <div className="feature-panel">
-            <div className="feature-panel-inner" style={{ minHeight: '320px' }}>
+          <div className="feature-panel cta-panel">
+            <div className="feature-panel-inner">
               <div>
                 <h2 className="font-sans font-extrabold leading-[1.02] tracking-[-0.03em]" style={{ fontSize: 'clamp(2.4rem, 1.4rem + 3.5vw, 4.4rem)', color: 'var(--color-paper)' }}>
                   Want to see your name <span style={{ color: 'var(--color-signal-soft)' }}>in the archive?</span>
